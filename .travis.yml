@@ -1,0 +1,19 @@
+os: linux
+
+addons:
+  apt:
+    packages:
+    - gdb
+
+install:
+  - sudo pip install git+https://github.com/mdavidsaver/ci-core-dumper#egg=ci-core-dumper
+
+before_script:
+  - sudo ci-core-dumper install
+
+script:
+  - ulimit -c unlimited
+  - ci-core-dumper crash --direct # remove after verification
+
+after_failure:
+  - ci-core-dumper report
