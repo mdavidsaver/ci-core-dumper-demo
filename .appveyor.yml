@@ -5,18 +5,17 @@ platform:
   - x64
 
 environment:
-  matrix:
-  # executable w/o debug symbols
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    PATH: C:\Python37-x64;%PATH%
+  APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+  PATH: C:\Python37-x64;%PATH%
 
 install:
   - cmd: pip install git+https://github.com/mdavidsaver/ci-core-dumper#egg=ci-core-dumper
 
-before_test:
-  - cmd: ci-core-dumper -v install
+build_script:
+  - cmd: echo nothing to build
 
 test_script:
+  - cmd: ci-core-dumper -v install
   - cmd: ci-core-dumper crash --direct # remove after verification
 
 on_finish:
