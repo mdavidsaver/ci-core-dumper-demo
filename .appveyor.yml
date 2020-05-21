@@ -9,17 +9,18 @@ environment:
   PATH: C:\Python37-x64;%PATH%
 
 install:
-  - cmd: pip install git+https://github.com/mdavidsaver/ci-core-dumper#egg=ci-core-dumper
+  - cmd: python -V
+  - cmd: python -m pip install git+https://github.com/mdavidsaver/ci-core-dumper#egg=ci-core-dumper
 
 build_script:
   - cmd: echo nothing to build
 
 test_script:
-  - cmd: ci-core-dumper -v install
-  - cmd: ci-core-dumper crash --direct # remove after verification
+  - cmd: python -m ci_core_dumper -v install
+  - cmd: python -m ci_core_dumper crash --direct # remove after verification
 
 on_finish:
-  - cmd: ci-core-dumper report
+  - cmd: python -m ci_core_dumper report
 
 notifications:
   - provider: GitHubPullRequest
