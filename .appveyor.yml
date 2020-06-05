@@ -17,7 +17,7 @@ build_script:
 
 test_script:
   - cmd: python -m ci_core_dumper -v install
-  - cmd: python -m ci_core_dumper crash --direct # remove after verification
+  - cmd: echo tests which might crash
 
 on_finish:
   - cmd: python -m ci_core_dumper report

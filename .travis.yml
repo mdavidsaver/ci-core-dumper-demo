@@ -13,7 +13,6 @@ before_script:
 
 script:
   - ulimit -c unlimited
-  - python -m ci_core_dumper crash --direct # remove after verification
 
 after_failure:
   - python -m ci_core_dumper report
