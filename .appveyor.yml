@@ -17,7 +17,7 @@ build_script:
 
 test_script:
   - cmd: python -m ci_core_dumper -v install
-  - cmd: echo Run something which may crash
+  # commands which may crash
 
 on_finish:
   - cmd: python -m ci_core_dumper report

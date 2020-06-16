@@ -1,19 +1,35 @@
-os: linux
+language: cpp
+
+# https://travis-ci.community/t/windows-builds-refreshenv-command-not-found/5803/4
+_anchors:
+  - &refreshpath eval $(powershell -NonInteractive -Command 'write("export PATH=`"" + ([Environment]::GetEnvironmentVariable("PATH","Machine") + ";" + [Environment]::GetEnvironmentVariable("PATH","User")).replace("\","/").replace("C:","/c").replace(";",":") + ":`$PATH`"")')
+
+matrix:
+  include:
+    - os: linux
+      before_install: sudo python -m pip install git+https://github.com/mdavidsaver/ci-core-dumper#egg=ci-core-dumper
+    # no sudo on windows
+    - os: windows
+      before_install:
+        - choco install python
+        - *refreshpath
+        - python -V
+        - python -m pip install git+https://github.com/mdavidsaver/ci-core-dumper#egg=ci-core-dumper
+    # a no-op on OSX
+    - os: osx
+      before_install: sudo python -m pip install git+https://github.com/mdavidsaver/ci-core-dumper#egg=ci-core-dumper
 
 addons:
   apt:
     packages:
     - gdb
 
-install:
-  - python -m pip install git+https://github.com/mdavidsaver/ci-core-dumper#egg=ci-core-dumper
-
 before_script:
   - python -m ci_core_dumper install
 
 script:
   - ulimit -c unlimited
-  - echo "Run something which may crash"
+  # commands which may crash"
 
 after_failure:
   - python -m ci_core_dumper report
