@@ -10,7 +10,7 @@ environment:
 
 install:
   - cmd: python -V
-  - cmd: python -m pip install git+https://github.com/mdavidsaver/ci-core-dumper#egg=ci-core-dumper
+  - cmd: python -m pip install git+https://github.com/mdavidsaver/ci-core-dumper@ci#egg=ci-core-dumper
 
 build_script:
   - cmd: echo nothing to build

@@ -7,17 +7,17 @@ _anchors:
 matrix:
   include:
     - os: linux
-      before_install: sudo python -m pip install git+https://github.com/mdavidsaver/ci-core-dumper#egg=ci-core-dumper
+      before_install: sudo python -m pip install git+https://github.com/mdavidsaver/ci-core-dumper@ci#egg=ci-core-dumper
     # no sudo on windows
     - os: windows
       before_install:
         - choco install python
         - *refreshpath
         - python -V
-        - python -m pip install git+https://github.com/mdavidsaver/ci-core-dumper#egg=ci-core-dumper
+        - python -m pip install git+https://github.com/mdavidsaver/ci-core-dumper@ci#egg=ci-core-dumper
     # a no-op on OSX
     - os: osx
-      before_install: sudo python -m pip install git+https://github.com/mdavidsaver/ci-core-dumper#egg=ci-core-dumper
+      before_install: sudo python -m pip install git+https://github.com/mdavidsaver/ci-core-dumper@ci#egg=ci-core-dumper
 
 addons:
   apt:
